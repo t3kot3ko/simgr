@@ -1,0 +1,31 @@
+%h1 Listing sims
+
+%table
+  %thead
+    %tr
+      %th Carrior
+      %th Number
+      %th Valid
+      %th Registered at
+      %th Imsi
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @sims.each do |sim|
+      %tr
+        %td= sim.carrior
+        %td= sim.number
+        %td= sim.valid
+        %td= sim.registered_at
+        %td= sim.imsi
+        %td= sim.user_id
+        %td= link_to 'Show', sim
+        %td= link_to 'Edit', edit_sim_path(sim)
+        %td= link_to 'Destroy', sim, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Sim', new_sim_path

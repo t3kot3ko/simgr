@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Carrior:
+  = @sim.carrior
+%p
+  %b Number:
+  = @sim.number
+%p
+  %b Valid:
+  = @sim.valid
+%p
+  %b Registered at:
+  = @sim.registered_at
+%p
+  %b Imsi:
+  = @sim.imsi
+%p
+  %b User:
+  = @sim.user_id
+
+= link_to 'Edit', edit_sim_path(@sim)
+\|
+= link_to 'Back', sims_path
