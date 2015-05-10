@@ -3,7 +3,7 @@ class CreateSims < ActiveRecord::Migration
     create_table :sims do |t|
       t.string :carrior
       t.string :number
-      t.integer :valid
+      t.boolean :available
       t.date :registered_at
       t.string :imsi
       t.integer :user_id
