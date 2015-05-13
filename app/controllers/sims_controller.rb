@@ -1,9 +1,10 @@
 class SimsController < ApplicationController
 	before_action :set_sim, only: [:show, :edit, :update, :destroy]
+	before_filter :authenticate_user!
 
 	# GET /sims
 	def index
-		@sims = Sim.all
+		@sims = Sim.where(user_id: current_user.id)
 	end
 
 	# GET /sims/1
@@ -22,6 +23,7 @@ class SimsController < ApplicationController
 	# POST /sims
 	def create
 		@sim = Sim.new(sim_params)
+		@sim.user_id = current_user.id
 
 		if @sim.save
 			redirect_to @sim, notice: 'Sim was successfully created.'
@@ -48,11 +50,16 @@ class SimsController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_sim
-		@sim = Sim.find(params[:id])
+		sim = Sim.find(params[:id])
+		unless sim.user_id == current_user.id
+			redirect_to sims_url, alert: "Selected SIM card is not yours" and return
+		end
+
+		@sim = sim
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def sim_params
-		params.require(:sim).permit(:carrior, :number, :valid, :registered_at, :imsi, :user_id)
+		params.require(:sim).permit(:carrior, :number, :available, :registered_at, :imsi)
 	end
 end

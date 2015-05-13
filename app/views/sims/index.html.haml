@@ -1,30 +1,30 @@
-%h1 Listing sims
+%h1 Your SIM cards
 
-%table
-  %thead
+%table.table.table-condensed
+  %tr
+    %th 
+    %th Carrior
+    %th Number
+    %th Valid
+    %th Registered at
+    %th Imsi
+    %th User
+    %th
+    %th
+    %th
+
+  - @sims.each do |sim|
     %tr
-      %th Carrior
-      %th Number
-      %th Valid
-      %th Registered at
-      %th Imsi
-      %th User
-      %th
-      %th
-      %th
-
-  %tbody
-    - @sims.each do |sim|
-      %tr
-        %td= sim.carrior
-        %td= sim.number
-        %td= sim.valid
-        %td= sim.registered_at
-        %td= sim.imsi
-        %td= sim.user_id
-        %td= link_to 'Show', sim
-        %td= link_to 'Edit', edit_sim_path(sim)
-        %td= link_to 'Destroy', sim, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= image_tag("sim_icon.png", height: 20)
+      %td= sim.carrior
+      %td= sim.number
+      %td= sim.available
+      %td= sim.registered_at
+      %td= sim.imsi
+      %td= sim.user_id
+      %td= link_to 'Show', sim
+      %td= link_to 'Edit', edit_sim_path(sim)
+      %td= link_to 'Destroy', sim, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

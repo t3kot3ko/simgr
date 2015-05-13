@@ -28,10 +28,14 @@
         %a.navbar-brand(href="#") Simgr
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
-            %li= link_to "Link 1", "/path1"
-            %li= link_to "Link 2", "/path2"
-            %li= link_to "Link 3", "/path3"
-            %li= link_to "Link 3", "/path3"
+            %li= link_to "SIM cards", sims_path
+            %li= link_to "Devices", "/path2"
+            %li= link_to "Dashboard", "/path3"
+            - if user_signed_in?
+              %li= link_to "Sign out", destroy_user_session_path, data:{confirm: "are you sure?"}
+            - else
+              %li= link_to "Sign in", new_user_session_path
+
 
     .container
       .row
