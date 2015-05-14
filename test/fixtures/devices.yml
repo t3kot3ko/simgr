@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sim_id: 1
+  user_id: 1
+  model_number: MyString
+  name: MyString
+  imei: MyString
+  description: MyText
+
+two:
+  sim_id: 1
+  user_id: 1
+  model_number: MyString
+  name: MyString
+  imei: MyString
+  description: MyText

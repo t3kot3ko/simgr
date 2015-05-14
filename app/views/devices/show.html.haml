@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Sim:
+  = @device.sim_id
+%p
+  %b User:
+  = @device.user_id
+%p
+  %b Model number:
+  = @device.model_number
+%p
+  %b Name:
+  = @device.name
+%p
+  %b Imei:
+  = @device.imei
+%p
+  %b Description:
+  = @device.description
+
+= link_to 'Edit', edit_device_path(@device)
+\|
+= link_to 'Back', devices_path
