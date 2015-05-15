@@ -3,6 +3,7 @@
 %table.table.table-condensed
   %tr
     %th 
+    %th 
     %th Carrior
     %th Number
     %th Valid
@@ -16,6 +17,11 @@
   - @sims.each do |sim|
     %tr
       %td= image_tag("sim_icon.png", height: 20)
+      %td
+        - if device = sim.attached_device
+          = link_to(device.id, device_path(device))
+        - else
+          detached
       %td= sim.carrior
       %td= sim.number
       %td= sim.available

@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
 
-  resources :devices
+  resources :devices do 
+		member do 
+			put "detach_sim"
+		end
+	end
+
 
 	root "home#index"
   get 'home/index'
 
   devise_for :users, controllers: {sessions: "users/sessions"}
-  resources :sims
+  resources :sims do 
+	end
 
 	resources "users" do 
 		collection do 

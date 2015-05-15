@@ -1,30 +1,28 @@
-%h1 Listing devices
+%h1 Your Devices
 
-%table
-  %thead
+%table.table.table-condensed
+  %tr
+    %th Sim
+    %th Model number
+    %th Name
+    %th Imei
+    %th Description
+    %th
+    %th
+    %th
+
+  - @devices.each do |device|
     %tr
-      %th Sim
-      %th User
-      %th Model number
-      %th Name
-      %th Imei
-      %th Description
-      %th
-      %th
-      %th
-
-  %tbody
-    - @devices.each do |device|
-      %tr
-        %td= device.sim_id
-        %td= device.user_id
-        %td= device.model_number
-        %td= device.name
-        %td= device.imei
-        %td= device.description
-        %td= link_to 'Show', device
-        %td= link_to 'Edit', edit_device_path(device)
-        %td= link_to 'Destroy', device, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td 
+        - if device.sim
+          = link_to(image_tag("sim_icon.png", height: 20), device_path(device))
+      %td= device.model_number
+      %td= device.name
+      %td= device.imei
+      %td= device.description
+      %td= link_to 'Show', device
+      %td= link_to 'Edit', edit_device_path(device)
+      %td= link_to 'Destroy', device, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

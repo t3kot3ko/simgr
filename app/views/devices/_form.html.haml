@@ -7,11 +7,9 @@
           %li= msg
 
   .field
-    = f.label :sim_id
-    = f.number_field :sim_id
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
+    = label_tag "SIM"
+    = select_tag("device[sim_id]",  options_for_select(@sims_options))
+    = link_to("Detach", detach_sim_device_path, method: :put)
   .field
     = f.label :model_number
     = f.text_field :model_number
