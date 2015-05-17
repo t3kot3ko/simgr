@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b From sim:
+  = @contract.from_sim_id
+%p
+  %b To sim:
+  = @contract.to_sim_id
+%p
+  %b Processed at:
+  = @contract.processed_at
+%p
+  %b Description:
+  = @contract.description
+%p
+  %b User:
+  = @contract.user_id
+%p
+  %b Type:
+  = @contract.type
+
+= link_to 'Edit', edit_contract_path(@contract)
+\|
+= link_to 'Back', contracts_path

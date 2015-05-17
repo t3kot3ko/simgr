@@ -1,0 +1,31 @@
+%h1 Listing contracts
+
+%table
+  %thead
+    %tr
+      %th From sim
+      %th To sim
+      %th Processed at
+      %th Description
+      %th User
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @contracts.each do |contract|
+      %tr
+        %td= contract.from_sim_id
+        %td= contract.to_sim_id
+        %td= contract.processed_at
+        %td= contract.description
+        %td= contract.user_id
+        %td= contract.type
+        %td= link_to 'Show', contract
+        %td= link_to 'Edit', edit_contract_path(contract)
+        %td= link_to 'Destroy', contract, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Contract', new_contract_path
