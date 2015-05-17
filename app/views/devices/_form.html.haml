@@ -8,7 +8,7 @@
 
   .field
     = label_tag "SIM"
-    = select_tag("device[sim_id]",  options_for_select(@sims_options))
+    = select_tag("device[sim_id]",  options_for_select(@sims_options, selected: @device.sim ? @device.sim.id : ""))
     = link_to("Detach", detach_sim_device_path, method: :put)
   .field
     = f.label :model_number

@@ -7,6 +7,10 @@ class Sim < ActiveRecord::Base
 	end
 
 	def attached_device
-		return Device.find_by(sim: self)
+		if Device.exists?(sim: self)
+			return Device.find_by(sim: self)
+		end
+
+		return nil
 	end
 end

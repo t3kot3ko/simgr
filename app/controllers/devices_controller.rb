@@ -70,16 +70,18 @@ class DevicesController < ApplicationController
     end
 
 		def set_sims_options
-			sims = Sim.where(user_id: current_user.id)
+			sims = Sim.where(user_id: current_user.id) + [nil]
 			options = sims.map do |sim|
-				if sim == @device.sim
+				if sim.nil?
+					["(detached)", nil]
+				elsif sim == @device.sim
 					["#{sim.number} (attached)"]
 				else
 					[sim.number, sim.id]
 				end
 			end
 
-			@sims_options = options + [["(detached)", nil]]
+			@sims_options = options
 		end
 
     # Never trust parameters from the scary internet, only allow the white list through.
