@@ -6,7 +6,6 @@ class CreateContracts < ActiveRecord::Migration
       t.date :processed_at
       t.text :description
       t.integer :user_id
-      t.string :type
 
       t.timestamps null: false
     end

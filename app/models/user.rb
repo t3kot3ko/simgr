@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
 	has_many :sims
 	has_many :devices
+	has_many :contracts
 end

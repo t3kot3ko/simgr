@@ -8,21 +8,15 @@
 
   .field
     = f.label :from_sim_id
-    = f.number_field :from_sim_id
+    = select_tag("contract[from_sim_id]",  options_for_select(@from_sim_options, selected: ""))
   .field
     = f.label :to_sim_id
-    = f.number_field :to_sim_id
+    = select_tag("contract[to_sim_id]",  options_for_select(@to_sim_options, selected: ""))
   .field
     = f.label :processed_at
     = f.date_select :processed_at
   .field
     = f.label :description
     = f.text_area :description
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :type
-    = f.text_field :type
   .actions
     = f.submit 'Save'

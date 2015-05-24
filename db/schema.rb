@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20150517093025) do
     t.date     "processed_at"
     t.text     "description"
     t.integer  "user_id"
-    t.string   "type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

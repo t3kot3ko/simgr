@@ -1,5 +1,6 @@
 class ContractsController < ApplicationController
   before_action :set_contract, only: [:show, :edit, :update, :destroy]
+	before_filter :authenticate_user!
 
   # GET /contracts
   def index
@@ -12,6 +13,10 @@ class ContractsController < ApplicationController
 
   # GET /contracts/new
   def new
+		sims = Sim.where(user_id: current_user.id)
+		@from_sim_options = sims.dup.map{|sim| [sim.number, sim.id]} << ["not selected", ""]
+		@to_sim_options = sims.dup.map{|sim| [sim.number, sim.id]}
+
     @contract = Contract.new
   end
 
@@ -22,6 +27,9 @@ class ContractsController < ApplicationController
   # POST /contracts
   def create
     @contract = Contract.new(contract_params)
+		@contract.user = current_user
+
+		from_sim_id, to_sim_id = @contract.from_sim_id, @contract.to_sim_id
 
 		if @contract.save
 			redirect_to @contract, notice: 'Contract was successfully created.'
@@ -48,7 +56,11 @@ class ContractsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contract
-      @contract = Contract.find(params[:id])
+      contract = Contract.find(params[:id])
+			unless contract.user == current_user
+				redirect_to contracts_url, alert: "Not your resource" and return
+			end
+			@contract = contract
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
