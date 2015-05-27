@@ -30,7 +30,8 @@
           %ul.nav.navbar-nav
             %li= link_to "SIM cards", sims_path
             %li= link_to "Devices", devices_path
-            %li= link_to "Dashboard", "/path3"
+            %li= link_to "Contracts", contracts_path
+            %li= link_to "Dashboard", "/"
             - if user_signed_in?
               %li= link_to "Sign out", destroy_user_session_path, data:{confirm: "are you sure?"}
             - else

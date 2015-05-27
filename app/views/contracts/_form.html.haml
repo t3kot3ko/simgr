@@ -10,6 +10,9 @@
     = f.label :from_sim_id
     = select_tag("contract[from_sim_id]",  options_for_select(@from_sim_options, selected: ""))
   .field
+    = label_tag "Make SIM card disabled"
+    = check_box_tag "disable_sim"
+  .field
     = f.label :to_sim_id
     = select_tag("contract[to_sim_id]",  options_for_select(@to_sim_options, selected: ""))
   .field

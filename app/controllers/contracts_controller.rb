@@ -15,7 +15,7 @@ class ContractsController < ApplicationController
   def new
 		sims = Sim.where(user_id: current_user.id)
 		@from_sim_options = sims.dup.map{|sim| [sim.number, sim.id]} << ["not selected", ""]
-		@to_sim_options = sims.dup.map{|sim| [sim.number, sim.id]}
+		@to_sim_options = sims.dup.map{|sim| [sim.number, sim.id]} << ["not selected", ""]
 
     @contract = Contract.new
   end
@@ -31,7 +31,16 @@ class ContractsController < ApplicationController
 
 		from_sim_id, to_sim_id = @contract.from_sim_id, @contract.to_sim_id
 
+		if from_sim_id == to_sim_id
+			logger.debug "#{from_sim_id}, #{to_sim_id}"
+			redirect_to( {action: :new}, alert: "from_sim and to_sim must not same") and return
+		end
+
+		# in MNP or cancel, SIM card can be made unavailable
 		if @contract.save
+			if params[:disable_sim] and Sim.exists?(from_sim_id)
+				Sim.find(from_sim_id).update(available: false)
+			end
 			redirect_to @contract, notice: 'Contract was successfully created.'
 		else
 			render :new
@@ -65,6 +74,6 @@ class ContractsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contract_params
-      params.require(:contract).permit(:from_sim_id, :to_sim_id, :processed_at, :description, :user_id, :type)
+      params.require(:contract).permit(:from_sim_id, :to_sim_id, :processed_at, :description)
     end
 end
