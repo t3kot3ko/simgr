@@ -13,7 +13,7 @@ class ContractsController < ApplicationController
 
   # GET /contracts/new
   def new
-		sims = Sim.where(user_id: current_user.id)
+		sims = Sim.where(user_id: current_user.id).select(&:available?)
 		@from_sim_options = sims.dup.map{|sim| [sim.number, sim.id]} << ["not selected", ""]
 		@to_sim_options = sims.dup.map{|sim| [sim.number, sim.id]} << ["not selected", ""]
 

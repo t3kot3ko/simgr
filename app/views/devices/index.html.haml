@@ -14,8 +14,8 @@
   - @devices.each do |device|
     %tr
       %td 
-        - if device.sim
-          = link_to(image_tag("sim_icon.png", height: 20), device_path(device))
+        - if sim = device.sim
+          = link_to(image_tag("sim_icon.png", height: 20), sim_path(sim))
       %td= device.model_number
       %td= device.name
       %td= device.imei
